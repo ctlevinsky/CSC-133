@@ -1,0 +1,31 @@
+package com.mycompany.myapp;
+
+import com.codename1.charts.util.ColorUtil;
+
+public class Missile extends Movable {
+
+	private static int fuel = 10;
+	
+	public Missile(int dir, double locX, double locY) {
+		this.setSpeed(20);
+		this.setDir(dir);
+		this.setColor(ColorUtil.MAGENTA);
+		this.setLocX(locX);
+		this.setLocY(locY);
+		System.out.println("missile fired");
+		
+	}
+	
+	public int getFuel() { return fuel; }
+	public void setFuel(int fuel) { Missile.fuel = fuel; }
+
+	public String toString() {
+		String parentDesc = super.toString();
+		String myDesc = "Missile: fuel = " + fuel + ", ";
+		return myDesc + parentDesc;
+	}
+	
+
+}
+
+

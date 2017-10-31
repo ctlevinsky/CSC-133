@@ -1,0 +1,16 @@
+package com.mycompany.myapp;
+
+import com.codename1.charts.util.ColorUtil;
+
+public class Ship extends Moveable implements ISteerable{
+
+	private int MissileCount = 10;
+	
+	public Ship() {
+		this.setSpeed(0);
+		this.setDir(0);
+		this.setColor(ColorUtil.BLUE);
+		this.setLocX(GameWorld.getSizeX() / 2.0);
+		this.setLocY(768.0 / 2.0);
+	}
+}

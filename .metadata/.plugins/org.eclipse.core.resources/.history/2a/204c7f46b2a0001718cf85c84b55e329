@@ -1,0 +1,15 @@
+package com.mycompany.myapp;
+
+public abstract class Fixed extends GameObject {
+
+	private static int id;
+
+	public static int getId() { return id; }
+	public static void setId(int id) { Fixed.id = id;}
+	
+	public String toString() {
+		String parentDesc = super.toString();
+		String myDesc = " id=" + id;
+		return parentDesc + myDesc;
+	}
+}

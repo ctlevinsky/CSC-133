@@ -1,0 +1,8 @@
+1505767013718	Delete element
+1505767157918	Delete element
+1506054178900	Encapsulate field 'score'
+1506090580373	Encapsulate field 'lightOn'
+1506092726704	Rename type 'Moveable'
+1506092767993	Rename type 'IMoveable'
+1506093117535	Encapsulate field 'rate'
+1506094389853	Rename type 'Astroid'

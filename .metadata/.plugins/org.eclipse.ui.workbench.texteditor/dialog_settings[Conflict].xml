@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="add" key="selection"/>
+		<item value="true" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="add"/>
+			<item value="GameObjectIterator"/>
+			<item value="myObjects"/>
+			<item value="toggle"/>
+			<item value="ast"/>
+			<item value="dialog()"/>
+			<item value="setDir"/>
+			<item value="getDir"/>
+			<item value="GameObject"/>
+			<item value="inc"/>
+			<item value="increase"/>
+			<item value="Increase"/>
+			<item value="Station"/>
+			<item value="Asteroid"/>
+			<item value="this"/>
+		</list>
+		<list key="replacehistory">
+			<item value="objectList"/>
+			<item value="setDirection"/>
+			<item value="getDirection"/>
+			<item value="dec"/>
+			<item value="decrease"/>
+			<item value="Decrease"/>
+			<item value="Ship"/>
+			<item value="Station"/>
+			<item value="box"/>
+			<item value="this"/>
+			<item value="commandPanel"/>
+			<item value="worldArray"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="385" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="523" key="DIALOG_HEIGHT"/>
+		<item value="672" key="DIALOG_X_ORIGIN"/>
+		<item value="445" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

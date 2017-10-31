@@ -1,0 +1,118 @@
+package com.mycompany.myapp;
+import com.codename1.ui.Form;
+import com.codename1.ui.Toolbar;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.plaf.Border;
+import com.codename1.charts.util.ColorUtil;
+import com.codename1.ui.CheckBox;
+import com.codename1.ui.Command;
+import com.codename1.ui.Component;
+import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
+
+
+
+public class Game extends Form {
+	private GameWorld gw;
+	private MapView mv; // new in A2
+	private PointsView pv; // new in A2
+	private Toolbar myToolbar;
+
+
+
+	public Game() {
+		gw = new GameWorld(); // create “Observable”
+		mv = new MapView(); // create an “Observer” for the map
+		pv = new PointsView(gw); // create an “Observer” for the points
+		gw.addObserver(mv); // register the map Observer
+		gw.addObserver(pv); // register the points observer
+
+		
+		setToolbar(myToolbar = new Toolbar());		
+		
+		
+		this.setLayout(new BorderLayout());
+		Container pointsContainer = new Container();
+		add(BorderLayout.NORTH,pointsContainer);
+		pointsContainer.getAllStyles().setPadding(Component.LEFT, 150);
+		pointsContainer.getAllStyles().setBorder(Border.createLineBorder(4,ColorUtil.BLUE));
+		pointsContainer.add(pv);
+		
+		
+		Container mapContainer = new Container();
+		add(BorderLayout.CENTER,mapContainer);
+		mapContainer.add(mv);
+		mapContainer.getAllStyles().setBorder(Border.createLineBorder(4,ColorUtil.LTGRAY));
+
+		
+		//Overflow Menu Commands
+		Command newCommand = new Command("New"); 		//does nothing yet
+		Command saveCommand = new Command("Save");		//does nothing yet
+		Command undoCommand = new Command("Undo");	//does nothing yet
+		CommandAbout aboutCommand = new CommandAbout("About", gw);
+		CommandQuit quitCommand = new CommandQuit("Quit", gw);
+		CommandSound toggleSound = new CommandSound("Sound", gw);
+		CommandAddAsteroid addAsteroid = new CommandAddAsteroid("Add Asteroid", gw);
+		CommandAddStation addStation = new CommandAddStation("Add Station", gw);
+		CommandAddShip addShip = new CommandAddShip("Add Ship", gw);
+		CommandIncrease inc = new CommandIncrease("Increase", gw);
+		CommandDecrease dec = new CommandDecrease("Decrease", gw);
+		CommandLeft left = new CommandLeft("Left", gw);
+		CommandRight right= new CommandRight("Right", gw);
+		CommandFire fire = new CommandFire("Fire", gw);
+		CommandJump jump = new CommandJump("Jump", gw);
+		CommandLoadMissiles resupply = new CommandLoadMissiles("Load Missiles", gw);
+		CommandKillAsteroid kill = new CommandKillAsteroid("Kill Asteroid", gw);
+		CommandCrashShip cs = new CommandCrashShip("Crash Ship", gw);
+		CommandExterminate ex = new CommandExterminate("Exterminate", gw);
+		CommandTick tick = new CommandTick("Tick", gw);
+		
+		
+		
+		CheckBox soundBox = new CheckBox("Toggle Sound");
+		soundBox.getAllStyles().setBgTransparency(255);
+		soundBox.getAllStyles().setBgColor(ColorUtil.LTGRAY);
+		soundBox.setCommand(toggleSound);
+		toggleSound.putClientProperty("SideComponent", soundBox);
+		
+
+		
+		
+		myToolbar.addCommandToOverflowMenu(toggleSound);
+		myToolbar.addCommandToOverflowMenu(newCommand);
+		myToolbar.addCommandToOverflowMenu(saveCommand);
+		myToolbar.addCommandToOverflowMenu(undoCommand);
+		myToolbar.addCommandToOverflowMenu(aboutCommand);
+		myToolbar.addCommandToOverflowMenu(quitCommand);
+		
+		
+		//Side bar Commands
+
+		myToolbar.addCommandToSideMenu(toggleSound);
+		myToolbar.addCommandToSideMenu(addAsteroid);
+		myToolbar.addCommandToSideMenu(addStation);
+		myToolbar.addCommandToSideMenu(addShip);
+		myToolbar.addCommandToSideMenu(resupply);
+		myToolbar.addCommandToSideMenu(kill);
+		myToolbar.addCommandToSideMenu(cs);
+		myToolbar.addCommandToSideMenu(ex);
+		myToolbar.addCommandToSideMenu(tick);
+
+
+		
+		//Key Listeners
+		addKeyListener('r', right);
+		addKeyListener('l', left);
+		addKeyListener('j', jump);
+		addKeyListener('i', inc);
+		addKeyListener('d', dec);
+		addKeyListener('f', fire);
+		
+		this.show();
+	}
+	
+		
+}
+
+

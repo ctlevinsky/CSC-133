@@ -1,0 +1,8 @@
+package com.mycompany.myapp;
+
+public interface IIterator<E> {
+
+	public GameObject getNext();
+	public boolean hasNext();
+	
+}

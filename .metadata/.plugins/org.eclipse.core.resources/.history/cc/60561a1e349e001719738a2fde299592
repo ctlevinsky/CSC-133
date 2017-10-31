@@ -1,0 +1,13 @@
+package com.mycompany.myapp;
+
+public class Ship extends Moveable implements ISteerable{
+
+	private int MissileCount = 10;
+	
+	public Ship() {
+		locX = 1024.0 / 2.0;
+		locY = 768.0 / 2.0;
+		speed = 0;
+		direction = 0;
+	}
+}

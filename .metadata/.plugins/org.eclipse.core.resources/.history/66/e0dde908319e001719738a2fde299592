@@ -1,0 +1,10 @@
+package com.mycompany.myapp;
+
+public class Ship extends Moveable implements ISteerable{
+
+	private int MissileCount = 10;
+	
+	public Ship() {
+		
+	}
+}

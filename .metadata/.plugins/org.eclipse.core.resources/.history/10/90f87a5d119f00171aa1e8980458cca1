@@ -1,0 +1,5 @@
+package com.mycompany.myapp;
+
+public class Astroid extends Moveable {
+
+}

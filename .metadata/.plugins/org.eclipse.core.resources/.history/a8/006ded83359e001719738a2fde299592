@@ -1,0 +1,13 @@
+package com.mycompany.myapp;
+
+public abstract class Moveable extends GameObject implements IMoveable {
+
+	protected int speed;
+	protected int direction;
+	
+	public void move() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

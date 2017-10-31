@@ -1,0 +1,284 @@
+package com.mycompany.myapp;
+
+import java.util.Iterator;
+import java.util.Observable;
+
+import com.codename1.ui.Dialog;
+
+
+
+
+public class GameWorld extends Observable implements IGameWorld {
+	
+	private final static double sizeX = 1024.0, sizeY = 768.0; //world dimensions
+	private int lives = 3, score = 0, time = 0, missiles = 0; //game statistics
+	private boolean sound = false;
+	private Ship ship;
+	private GameObjectCollection collection;
+	private GameWorldProxy proxy;
+
+
+
+	
+	public GameWorld() {
+		init();
+	}
+	
+
+	public void init() {
+		lives = 3;
+		score = 0;
+		time = 0;
+		collection = new GameObjectCollection();
+		proxy = new GameWorldProxy(this);
+	}
+	
+
+	public int getLives() {
+		return lives;
+	}
+
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public int getTime() {
+		return time;
+	}
+	
+	public int getMissiles() {
+		return missiles;
+	}
+
+	public void incTime() {
+		this.time += 1;
+	}
+
+	public static double getSizex() {
+		return sizeX;
+	}
+
+	public static double getSizey() {
+		return sizeY;
+	}
+	
+	public boolean getSound() {
+		return sound;
+	}
+	
+	public void soundOn() {
+		sound = true;
+	}
+	
+	public void soundOff() {
+		sound = false;
+	}
+
+	public void addAsteroid() {
+		collection.add(new Asteroid());
+	}
+
+	public void addStation() {
+		collection.add(new SpaceStation());
+	}
+
+	public void addShip() {
+		if (!(ship instanceof Ship)) {
+			ship = new Ship(sizeX,sizeY);	
+			collection.add(ship);
+			missiles = ship.getMissile();
+			updateWorld() ;
+		}
+		else
+			System.out.println("no ship created");
+	}
+
+	public void incSpeed() {
+		if (ship instanceof Ship)
+			ship.accelerate(1);
+		else 
+			System.out.println("Cannot execute 'increase' – no ship has been created");
+	}
+
+	public void decSpeed() {
+		if (ship instanceof Ship)
+			ship.accelerate(-1);
+		else 
+			System.out.println("Cannot execute 'decrease' – no ship has been created");
+	}
+
+	public void turnLeft() {
+		if (ship instanceof Ship)
+			ship.turn(-10); 
+		else 
+			System.out.println("Cannot execute 'left' – no ship has been created");
+	}
+
+	public void turnRight() {
+		if (ship instanceof Ship)
+			ship.turn(10); 
+		else 
+			System.out.println("Cannot execute 'right' – no ship has been created");	
+	}
+
+	public void fire() {
+		if (ship instanceof Ship) {
+			int missileCount = ship.getMissile();
+			if (missileCount > 0) {
+				collection.add(new Missile(ship.getDirection(),ship.getLocX(),ship.getLocY()));
+				ship.decMissiles();
+				missiles = ship.getMissile();
+				updateWorld() ;
+			}
+			else
+				System.out.println("OUT OF AMMO!");	
+		}
+		else
+			System.out.println("Cannot execute 'fire' – no ship has been created");
+	}
+
+	public void jump() {
+		if (ship instanceof Ship) {
+			ship.setLocX(sizeX / 2.0);
+			ship.setLocY(sizeY / 2.0);
+		}
+		else
+			System.out.println("Cannot execute 'jump' – no ship has been created");
+	}
+
+	public void resupply() {
+		if (ship instanceof Ship) {
+			ship.reload();
+			missiles = ship.getMissile();
+			updateWorld() ;
+		}
+		else 
+			System.out.println("Cannot execute 'new' – no ship has been created");	
+	}
+
+	public void killAstrd() {
+		GameObject temp;
+		int asteroids = collection.getAsteroidCount(),
+		       missiles = collection.getMissileCount();
+		if(asteroids > 0 && missiles > 0) {
+			Iterator it = collection.getIterator();
+			while(it.hasNext()) {
+				temp  = (GameObject) it.next();
+				if(temp instanceof Missile) {
+					it.remove();
+					break;
+				}
+			}
+			it = collection.getIterator();
+			while(it.hasNext()) {
+				temp  = (GameObject) it.next();
+				if(temp instanceof Asteroid) {
+					it.remove();
+					break;
+				}
+			}
+			score += 100;
+			updateWorld() ;
+		}
+		else
+			System.out.println("Cannot Execute 'kill' - must have a missile AND asteroid");
+	}
+
+	public void crash() {
+		int asteroids = collection.getAsteroidCount(),
+		       ships = collection.getShipCount();
+		if(asteroids > 0 && ships > 0) {
+
+			ship = null;
+			if(lives > 0)
+				lives --;
+			else
+				System.out.println("GAME OVER!");
+			updateWorld() ;
+		}
+		else
+			System.out.println("Cannot Execute 'crash' - requires 1 ship AND 1+ asteroids" );
+	}
+
+	public void extrmnt() {
+		int asteroids = collection.getAsteroidCount();
+		if(asteroids > 1) {
+
+			updateWorld() ;
+		}
+		else
+			System.out.println("Connot execute 'exterminate' - not enough asteroids");
+	}
+
+	public void clockTick() {
+		incTime();
+		GameObject temp;
+		Iterator it = collection.getIterator();
+		while(it.hasNext()) {
+			temp = (GameObject) it.next();
+			if (temp instanceof IMovable) {
+				((IMovable) temp).move();
+			}
+			if(temp instanceof SpaceStation) {
+				if (time % ((SpaceStation) temp).getRate() == 0) {
+					((SpaceStation) temp).toggleLights();
+				}
+			}
+			if(temp instanceof Missile) {
+				if(((Missile) temp).getFuel() > 1)
+					((Missile) temp).decFuel();
+				else
+					it.remove();
+			}
+		}
+		updateWorld() ;
+		printMap();
+	}
+	
+	public void removeObject(Class cls) {
+		Iterator it = collection.getIterator();
+		while(it.hasNext()) {
+			if(cls.isInstance(it.next()) ) {
+				it.remove();
+				break;
+			}
+		}
+	}
+	
+	public void about() {
+		Dialog.show("About", "Author: Charles Levinsky \n"
+				+ "CSC 133 \nVersion: 2.0", "OK", null);
+	}
+	
+	public void toggleSound() {
+		sound = !sound;
+		updateWorld();
+	}
+
+	public void print() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void printMap() {
+		Iterator it = collection.getIterator();
+		while(it.hasNext()) 
+			System.out.println(it.next());		
+		System.out.println();
+	}
+
+	private void  updateWorld() {
+		setChanged();
+		proxy = new GameWorldProxy(this);
+		notifyObservers(proxy);
+	}
+
+}

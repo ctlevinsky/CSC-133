@@ -1,0 +1,98 @@
+package com.mycompany.myapp;
+
+
+public class GameWorld {
+
+	private final static double sizeX = 1024.0,
+								sizeY = 768.0;
+	
+	private int lives = 3;
+	
+	private Ship ship;
+	
+	public void init(){
+		//code here to create the initial game objects and setup
+	}
+	// additional methods here to  manipulate world objects and
+	// related game state data
+	public double getSizeX() {
+		return sizeX;
+	}
+	
+	public double getSizeY() {
+		return sizeY;
+	}
+
+	public void addAstroid() {
+		
+	}
+
+	public void addStation() {
+		
+	}
+	
+	public void addShip() {
+		if (!(ship instanceof Ship)) {
+			ship = new Ship();	
+		}
+		else
+			System.out.println("no ship created");
+	}
+	
+	public void incSpeed() {
+		ship.accelerate(1);
+	}
+	
+	public void decSpeed() {
+		ship.accelerate(-1);
+	}
+	
+	public void turnLeft() {
+		
+	}
+	
+	public void turnRight() {
+		
+	}
+	
+	public void fire() {
+		
+	}
+	
+	public void jump() {
+		
+	}
+	
+	public void resupply() {
+		
+	}
+	
+	public void killAstrd() {
+		
+	}
+	
+	public void crash() {
+		
+	}
+	
+	public void extrmnt() {
+		
+	}
+	
+	public void clockTick() {
+		
+	}
+
+	public void print() {
+		System.out.println(ship.toString());
+	}
+	
+	public void printMap() {
+		
+	}
+	
+	public void quit() {
+		
+	}
+}
+	

@@ -1,0 +1,10 @@
+package com.mycompany.myapp;
+
+import java.util.Iterator;
+
+public interface ICollection {
+
+	public void add(GameObject o);
+	public IIterator getIterator();
+	
+}

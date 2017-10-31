@@ -1,0 +1,26 @@
+package com.mycompany.myapp;
+
+public abstract class GameObject {
+
+	private double locX, locY;
+	private int color;
+	
+
+	
+	public double getLocX() { return locX; }
+	
+	public double getLocY() { return locY; }
+	
+	public int getColor() { return color; }
+	
+	public void setLocX(double loc) { this.locX = loc; }
+	
+	public void setLocY(double loc) { this.locY = loc; }
+	
+	public void setColor(int color) { this.color = color; }
+	
+	public String toString() {
+		String goString = "location = (" + locX + ",  " + locY + "), color = " + color;
+		return goString;
+	}
+}

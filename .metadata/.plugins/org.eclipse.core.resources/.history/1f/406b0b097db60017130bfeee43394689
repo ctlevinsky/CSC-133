@@ -1,0 +1,20 @@
+package com.mycompany.myapp;
+
+import com.codename1.ui.Command;
+import com.codename1.ui.Image;
+import com.codename1.ui.events.ActionEvent;
+
+public class CommandAbout extends Command {
+	private GameWorld gw;
+
+	public CommandAbout(String command, GameWorld world) {
+		super(command);
+		gw = world;
+	}
+
+	public void actionPerformed(ActionEvent evt) {
+		System.out.println("About pressed");
+		gw.about();
+	}
+	
+}

@@ -1,0 +1,17 @@
+package com.mycompany.myapp;
+
+import com.codename1.charts.util.ColorUtil;
+
+public class Missile extends Moveable {
+
+	private static int fuel = 10;
+	
+	public Missile() {
+		this.setSpeed(0);
+		this.setDir(0);
+		this.setColor(ColorUtil.BLUE);
+		this.setLocX(1024.0 / 2.0);
+		this.setLocY(768.0 / 2.0);
+		System.out.println("ship created");
+	}
+}

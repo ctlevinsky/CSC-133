@@ -1,0 +1,10 @@
+package com.mycompany.myapp;
+
+public abstract class GameObject {
+
+	protected double locX,
+	                 locY;
+	protected int color;
+	
+	
+}

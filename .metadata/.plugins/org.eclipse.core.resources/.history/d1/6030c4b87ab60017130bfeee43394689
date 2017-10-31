@@ -1,0 +1,277 @@
+package com.mycompany.myapp;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+
+public class GameObjectCollection implements ICollection {
+	
+	private ArrayList<GameObject> objectList;
+	private GameObjectIterator it;
+	private int shipCount, asteroidCount, missileCount, stationCount;
+
+	public GameObjectCollection() {
+		objectList = new ArrayList<GameObject>();
+		shipCount = 0;
+		asteroidCount = 0;
+		missileCount = 0;
+		stationCount = 0;
+	}
+
+	
+
+	
+	public int getShipCount() {
+		return shipCount;
+	}
+	
+	public int getAsteroidCount() {
+		return asteroidCount;
+	}
+	
+
+	public int getMissileCount() {
+		return missileCount;
+	}
+	
+
+	public int getStationCount() {
+		return stationCount;
+	}
+	
+	
+	public  Iterator getIterator() {
+        GameObjectIterator gameItr = new GameObjectIterator(objectList);
+        return gameItr;
+	}
+	
+	public void add(GameObject o) {
+		objectList.add(o);
+		if (o instanceof Asteroid)
+			asteroidCount++;
+		else if( o instanceof Ship)
+			shipCount++;
+		else if(o instanceof Missile)
+			missileCount++;
+		else if(o instanceof SpaceStation)
+			stationCount++;
+	}
+	
+    public void remove(GameObject o) {
+		if (o instanceof Asteroid)
+			asteroidCount--;
+		else if( o instanceof Ship)
+			shipCount--;
+		else if(o instanceof Missile)
+			missileCount--;
+		else if(o instanceof SpaceStation)
+			stationCount--;
+        objectList.remove(objectList.indexOf(o));
+    }
+	
+    
+    
+	private class GameObjectIterator implements Iterator<GameObject> {
+
+        private int current = 0, next = 0;
+
+        public GameObjectIterator(ArrayList<GameObject> go) {
+            objectList = go;
+        }
+
+        public boolean hasNext() {
+            return next < objectList.size();
+        }
+
+        public GameObject next() {
+            current = next;
+            GameObject currentObj = objectList.get(current);
+            next += 1;
+            return currentObj;
+        }
+
+        public void remove() {
+        	GameObject go = objectList.get(current); ;
+    		if (go instanceof Asteroid)
+    			asteroidCount--;
+    		else if( go instanceof Ship)
+    			shipCount--;
+    		else if(go instanceof Missile)
+    			missileCount--;
+    		else if(go instanceof SpaceStation)
+    			stationCount--;
+            objectList.remove(current);
+        }
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+public class GameObjectCollection implements ICollection {
+
+	
+	private ArrayList<GameObject> objectList;
+	private Iterator it;
+	private int shipCount, asteroidCount, missileCount, stationCount;
+	
+	public GameObjectCollection() {
+		objectList = new ArrayList<GameObject>();
+		shipCount = 0;
+		asteroidCount = 0;
+		missileCount = 0;
+		stationCount = 0;
+	}
+	
+	public ArrayList<GameObject> getObjectList() {
+		return objectList;
+	}
+	
+	public int getAsteroidCount() {
+		return asteroidCount;
+	}
+
+	public void setAsteroidCount(int asteroidCount) {
+		this.asteroidCount = asteroidCount;
+	}
+
+	public int getShipCount() {
+		return shipCount;
+	}
+
+	public void setShipCount(int shipCount) {
+		this.shipCount = shipCount;
+	}
+
+	public int getMissileCount() {
+		return missileCount;
+	}
+
+	public void setMissileCount(int missileCount) {
+		this.missileCount = missileCount;
+	}
+
+	public int getStationCount() {
+		return stationCount;
+	}
+
+	public void setStationCount(int stationCount) {
+		this.stationCount = stationCount;
+	}
+
+	
+	public void add(GameObject o) {
+		objectList.add(o);
+	}
+	
+	public void printMap() {
+		this.getIterator();
+		while(it.hasNext()) 
+			System.out.println(it.getNext());		
+		System.out.println();
+	}
+	
+	public void removeAsteroid() {
+		this.getIterator();
+		while(it.hasNext()) {
+			if (it.getNext() instanceof Asteroid) {
+				it.remove();
+				asteroidCount -= 1;
+				break;
+			}
+		}
+	}
+	
+	public void removeShip() {
+		this.getIterator();
+		while(it.hasNext()) {
+			if (it.getNext() instanceof Ship) {
+				it.remove();
+				shipCount = 0;
+				break;
+			}
+		}
+	}
+	
+	public void removeMissile() {
+		this.getIterator();
+		while(it.hasNext()) {
+			if (it.getNext() instanceof Missile) {
+				it.remove();
+				missileCount -= 1;
+				break;
+			}
+		}
+	}
+	
+	public void clockTick() {
+		Object temp;
+		this.getIterator();
+		while(it.hasNext()) {
+			temp = it.getNext();
+			if(temp instanceof Movable) {
+				
+			}
+		}
+	}
+	
+	public void getIterator() {
+		it = new Iterator();
+	}
+	
+	
+	private class Iterator implements IIterator{
+		
+		private int currentIndex;
+		
+		public Iterator() {
+			currentIndex = -1;
+		}
+
+		public GameObject getNext() {
+			GameObject go = null;
+			if(this.hasNext()) 
+				currentIndex++;
+				go = objectList.get(currentIndex);
+			return go;
+		}
+
+		public boolean hasNext() {
+			return currentIndex + 1 < objectList.size();
+		}
+		
+		public void remove() {
+			objectList.remove(currentIndex);
+		}
+	}
+
+}
+*/

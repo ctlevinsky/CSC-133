@@ -1,0 +1,30 @@
+package com.mycompany.myapp;
+import java.util.Random;
+import com.codename1.charts.util.ColorUtil;
+
+public class SpaceStation extends Fixed {
+
+	private Random rand = new Random();
+	private int rate = 1 + rand.nextInt(9);
+	private boolean lightOn = true;
+	
+	public int getRate() { return rate; }
+	public void setRate(int rate) { this.rate = rate; }
+	public boolean isLightOn() { return lightOn; }
+	public void setLightOn(boolean lightOn) { this.lightOn = lightOn; }
+	
+/**
+ * SpaceStation constructor
+ */
+	public SpaceStation() {
+		this.setLocX(1.0 * rand.nextInt(1024));
+		this.setLocY(1.0 * rand.nextInt(768));
+		this.setColor(ColorUtil.GREEN);
+	}
+	
+	public String toString() {
+		String parentDesc = super.toString();
+		String myDesc = " rate=" + rate;
+		return "Station: " + parentDesc + myDesc;
+	}
+}

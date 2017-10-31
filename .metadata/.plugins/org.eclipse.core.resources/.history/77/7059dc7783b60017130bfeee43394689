@@ -1,0 +1,61 @@
+package com.mycompany.myapp;
+
+import com.codename1.charts.util.ColorUtil;
+import com.codename1.ui.CheckBox;
+import com.codename1.ui.Command;
+import com.codename1.ui.Form;
+import com.codename1.ui.Label;
+import com.codename1.ui.SideMenuBar;
+import com.codename1.ui.Toolbar;
+import com.codename1.ui.events.ActionEvent;
+
+public class SideMenuItemCheckFormUsingCommand extends Form {
+	     private Label checkStatusVal = new Label("OFF");
+		  public SideMenuItemCheckFormUsingCommand() {
+	      Toolbar myToolbar = new Toolbar();	
+	      this.setToolbar(myToolbar);
+		  //...[add a Toolbar and some side menu items]
+		  CheckBox checkSideMenuComp = new CheckBox("Check Side Menu Component");
+		  checkSideMenuComp.getAllStyles().setBgTransparency(255);
+		  checkSideMenuComp.getAllStyles().setBgColor(ColorUtil.LTGRAY);
+
+		  //...[change style of the check box]
+		  //create a command object and set it as the command of check box
+		  Command mySideMenuItemCheck = new SideMenuItemCheck(this);
+		  checkSideMenuComp.setCommand(mySideMenuItemCheck);
+		  //set "SideComponent" property of the command object to the check box
+		  mySideMenuItemCheck.putClientProperty("SideComponent", checkSideMenuComp);
+		  //add the command to the side menu, this places its side component (check box) in the side menu
+		  myToolbar.addCommandToSideMenu(mySideMenuItemCheck);
+		  //add a label to indicate the check box value on the form, divide the label to two parts, text
+		  //and value, and add padding to value part so that the labels looks stable when value changes
+		  Label checkStatusText = new Label("Check Box Status:");
+		  checkStatusVal.getAllStyles().setPadding(LEFT, 5);	
+		  checkStatusVal.getAllStyles().setPadding(RIGHT,5);	
+		  this.add(checkStatusVal);
+		  this.show();
+		  //...[add labels to the form and show the form]
+		  }
+	    public void setCheckStatusVal(boolean bVal){
+		   if (bVal)
+			    checkStatusVal.setText("ON");
+		   else
+			   checkStatusVal.setText("OFF");
+	    } 
+	    
+	    public class SideMenuItemCheck extends Command {
+	    	  private SideMenuItemCheckFormUsingCommand myForm;
+	    	  public SideMenuItemCheck (SideMenuItemCheckFormUsingCommand fForm){
+	    	    super("Side Menu Item Check"); //do not forget to set the “command name”
+	    	    myForm = fForm;}
+	    	@Override
+	    	public void actionPerformed(ActionEvent evt){
+	    	  if (((CheckBox)evt.getComponent()).isSelected())//getComponent() returns the component 					        //that generated the event
+	    	    myForm.setCheckStatusVal(true);
+	    	  else
+	    	    myForm.setCheckStatusVal(false);
+	    	  SideMenuBar.closeCurrentMenu(); //do not forget to close the side menu
+	    	  }//actionPerformed
+	    }// SideMenuItemCheck class
+
+}

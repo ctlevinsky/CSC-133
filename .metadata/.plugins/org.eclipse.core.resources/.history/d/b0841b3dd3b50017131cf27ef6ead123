@@ -1,0 +1,92 @@
+package com.mycompany.myapp;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class GOCollection implements ICollection {
+	
+	private ArrayList<GameObject> objectList;
+	private Iterator it;
+	private int shipCount, asteroidCount, missileCount, stationCount;
+
+	public GOCollection() {
+		objectList = new ArrayList<GameObject>();
+		shipCount = 0;
+		asteroidCount = 0;
+		missileCount = 0;
+		stationCount = 0;
+	}
+
+	@Override
+	public void getIterator() {
+        GameObjectIterator gameItr = new GameObjectIterator(objectList);
+       // return gameItr;
+
+	}
+	
+	public GameObjectIterator iterator() {
+        GameObjectIterator gameItr = new GameObjectIterator(objectList);
+        return gameItr;
+	}
+	
+	public int getShipCount() {
+		return shipCount;
+	}
+
+	public void setShipCount(int shipCount) {
+		this.shipCount = shipCount;
+	}
+
+	public int getMissileCount() {
+		return missileCount;
+	}
+
+	public void setMissileCount(int missileCount) {
+		this.missileCount = missileCount;
+	}
+
+	public int getStationCount() {
+		return stationCount;
+	}
+
+	public void setStationCount(int stationCount) {
+		this.stationCount = stationCount;
+	}
+
+	
+	public void add(GameObject o) {
+		objectList.add(o);
+	}
+	
+	private class GameObjectIterator implements Iterator<GameObject> {
+
+        private int current = 0, next = 0;
+
+        public GameObjectIterator(ArrayList<GameObject> go) {
+            objectList = go;
+        }
+
+
+        @Override
+        public boolean hasNext() {
+            return next < objectList.size();
+        }
+
+        @Override
+        public GameObject next() {
+            current = next;
+            GameObject currentObj = objectList.get(current);
+            next += 1;
+            return currentObj;
+
+        }
+
+
+        @Override
+        public void remove() {
+            objectList.remove(current);
+        }
+
+    }
+
+}

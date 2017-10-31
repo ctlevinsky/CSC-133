@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="java.util.Observable"/>
+<fullyQualifiedTypeName name="com.codename1.ui.layouts.BorderLayout"/>
+<fullyQualifiedTypeName name="com.codename1.ui.Label"/>
+<fullyQualifiedTypeName name="com.codename1.charts.util.ColorUtil"/>
+<fullyQualifiedTypeName name="com.codename1.ui.plaf.Border"/>
+<fullyQualifiedTypeName name="com.codename1.ui.Component"/>
+<fullyQualifiedTypeName name="com.codename1.ui.layouts.BoxLayout"/>
+<fullyQualifiedTypeName name="com.codename1.ui.Button"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="com.codename1.ui.Toolbar"/>
+<fullyQualifiedTypeName name="com.codename1.ui.TextField"/>
+<fullyQualifiedTypeName name="com.codename1.ui.Command"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.codename1.ui.MenuBar"/>
+<fullyQualifiedTypeName name="com.codename1.ui.Dialog"/>
+<fullyQualifiedTypeName name="com.codename1.ui.events.ActionEvent"/>
+<fullyQualifiedTypeName name="com.codename1.ui.CheckBox"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+</qualifiedTypeNameHistroy>

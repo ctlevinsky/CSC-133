@@ -1,0 +1,36 @@
+package com.mycompany.myapp;
+
+
+
+import com.codename1.ui.Component;
+import com.codename1.ui.Container;
+import com.codename1.ui.Label;
+import com.codename1.ui.layouts.BoxLayout;
+
+import java.util.Observable;
+import java.util.Observer;
+
+
+
+public class PointsView extends Container implements Observer {
+	
+		private Label lives, score, time, missiles;
+		public PointsView(GameWorld  gw) {
+		this.getAllStyles().setPadding(Component.TOP, 20);
+		this.getAllStyles().setPadding(Component.BOTTOM, 20);
+
+	
+		this.add(score = new Label("Score: 0"));
+		this.add(lives = new Label("Lives: 3" ));
+		this.add(missiles = new Label("Missiles: 0"));
+		this.add(time = new Label("Elapsed Time: 0"));
+	}
+
+	public void update(Observable observable, Object data) {
+			lives.setText("Lives: " + ((GameWorld) observable).getLives());
+			score.setText("Score: " + ((GameWorld) observable).getScore());
+			time.setText("Time: " + ((GameWorld) observable).getTime());
+			missiles.setText("Missiles: " + ((GameWorld) observable).getMissiles());
+	}
+
+}

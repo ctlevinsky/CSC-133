@@ -1,0 +1,56 @@
+package com.mycompany.myapp;
+import com.codename1.ui.Form;
+import com.codename1.ui.events.ActionListener; 
+import com.codename1.ui.Label;
+import com.codename1.ui.TextField;
+import com.codename1.ui.events.ActionEvent; 
+import java.lang.String;
+
+
+public class Game extends Form {
+
+	private GameWorld gw;
+	
+	public Game() {
+		gw = new GameWorld();
+		gw.init();
+		play();
+	}
+	
+	private void play() {
+		// code here to accept and execute user commands that
+		// operate on the game world (refer to "Appendix - CN1
+		// Notes" for accepting keyboard commands via a text
+		// field located on the form)
+		Label myLabel=new Label ("Enter a Command:");
+		this.addComponent(myLabel);
+		final TextField myTextField = new TextField();
+		this.addComponent(myTextField);
+		this.show();
+		myTextField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				String sCommand = myTextField.getText().toString();
+				myTextField.clear();
+				switch (sCommand.charAt(0)){
+					case 'a':	gw.addAstroid();break;
+					case 'b':	gw.addStation();break;
+					case 's':	gw.addShip();	break;
+					case 'i':	gw.incSpeed();	break;
+					case 'd':	gw.decSpeed();	break;
+					case 'l':	gw.turnLeft();	break;
+					case 'r':	gw.turnRight(); break;
+					case 'f':	gw.fire();		break;	
+					case 'j':	gw.jump();		break;
+					case 'n':	gw.resupply();	break;
+					case 'k':	gw.killAstrd();	break;
+					case 'c':	gw.crash();		break;
+					case 'x':	gw.extrmnt();	break;
+					case 't':	gw.clockTick();	break;
+					case 'p':	gw.print();		break;
+					case 'm':	gw.printMap(); 	break;
+					case 'q':	gw.quit();		break;	
+				}
+			}
+		});
+	}
+}

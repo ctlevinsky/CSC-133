@@ -1,0 +1,8 @@
+package com.mycompany.myapp;
+
+public class Missile extends Moveable {
+
+	private static int fuel = 10;
+	
+	
+}

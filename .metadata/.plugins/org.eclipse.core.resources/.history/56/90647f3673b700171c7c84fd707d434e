@@ -1,0 +1,35 @@
+package com.mycompany.myapp;
+
+import com.codename1.charts.util.ColorUtil;
+import com.codename1.ui.Button;
+import com.codename1.ui.Command;
+import com.codename1.ui.Image;
+
+public class myButton extends Button {
+
+	public myButton() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public myButton(String text) {
+		super(text);
+		// TODO Auto-generated constructor stub
+	}
+
+	public myButton(Command cmd) {
+		super(cmd);
+		this.getAllStyles().setBgColor(ColorUtil.CYAN);
+		this.getAllStyles().setFgColor(ColorUtil.BLUE);
+	}
+
+	public myButton(Image icon) {
+		super(icon);
+		// TODO Auto-generated constructor stub
+	}
+
+	public myButton(String text, Image icon) {
+		super(text, icon);
+		// TODO Auto-generated constructor stub
+	}
+
+}

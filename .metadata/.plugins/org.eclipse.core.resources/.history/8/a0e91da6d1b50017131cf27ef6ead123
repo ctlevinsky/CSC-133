@@ -1,0 +1,21 @@
+package com.mycompany.myapp;
+
+public class GOCollection implements ICollection {
+
+	public GOCollection() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void add(GameObject o) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void getIterator() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

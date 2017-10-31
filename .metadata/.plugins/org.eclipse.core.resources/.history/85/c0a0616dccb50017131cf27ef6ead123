@@ -1,0 +1,23 @@
+package com.mycompany.myapp;
+
+import com.codename1.ui.Command;
+import com.codename1.ui.Dialog;
+import com.codename1.ui.events.ActionEvent;
+
+public class CommandAddAsteroid extends Command {
+	private GameWorld gw;
+	
+	public CommandAddAsteroid(String command, GameWorld world) {
+		super(command);
+		gw = world;
+	}
+	
+	public void actionPerformed(ActionEvent evt) {
+		gw.about();
+	}
+	
+	public void addAsteroid() {
+		System.out.println ("Add Asteroid Pushed");
+		
+	}
+}

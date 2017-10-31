@@ -1,0 +1,25 @@
+package com.mycompany.myapp;
+
+import com.codename1.charts.util.ColorUtil;
+
+public class Missile extends Moveable {
+
+	private static int fuel = 10;
+	
+	public Missile(int dir, double locX, double locY) {
+		this.setSpeed(20);
+		this.setDir(dir);
+		this.setColor(ColorUtil.GREEN);
+		this.setLocX(locX);
+		this.setLocY(locY);
+		System.out.println("missile fired");
+		
+		
+		//needs to be tied to clock and fuel loss
+		if(fuel <= 0) { this.setSpeed(0); }
+	}
+	
+
+}
+
+

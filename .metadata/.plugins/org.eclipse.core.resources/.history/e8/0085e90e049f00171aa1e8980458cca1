@@ -1,0 +1,50 @@
+package com.mycompany.myapp;
+
+import com.codename1.charts.util.ColorUtil;
+
+public class Ship extends Moveable implements ISteerable{
+
+	private int missileCount = 10;
+	
+	public Ship() {
+		this.setSpeed(0);
+		this.setDir(0);
+		this.setColor(ColorUtil.BLUE);
+		this.setLocX(1024.0 / 2.0);
+		this.setLocY(768.0 / 2.0);
+		System.out.println("ship created");
+	}
+
+	public void turn(int dir) {
+		int currentDir = this.getDir();
+		if (currentDir < 350 && dir >= 0) {
+			this.setDir(currentDir + 10);
+		}
+		else if (currentDir >= 350) {
+			this.setDir(0);
+		}
+		else if (currentDir >= 10 && )
+	}
+	
+	public void accelerate(int change) {
+		int currentSpeed = this.getSpeed();
+		if (change >= 0 && currentSpeed < 10) {
+			this.setSpeed(currentSpeed + 1);
+		}
+		else if (currentSpeed > 0)
+			this.setSpeed(currentSpeed - 1);
+	}
+	
+	public void fireMissile() {
+		
+	}
+	
+	public String toString() {
+		String parentDesc = super.toString();
+		String myDesc = "Ship: missiles = " + missileCount + ", ";
+		//String shipString = "SHIP: " + super.toString() + ", missiles = " + missileCount;
+		return myDesc + parentDesc;
+		
+	}
+	
+}

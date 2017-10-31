@@ -1,0 +1,15 @@
+package com.mycompany.myapp;
+import java.util.Random;
+import com.codename1.charts.util.ColorUtil;
+
+public class SpaceStation extends Fixed {
+
+	private Random rand = new Random();
+	
+	public SpaceStation() {
+		this.setLocX(1.0 * rand.nextInt(1024));
+		this.setLocY(1.0 * rand.nextInt(768));
+		this.setColor(ColorUtil.GREEN);
+
+	}
+}

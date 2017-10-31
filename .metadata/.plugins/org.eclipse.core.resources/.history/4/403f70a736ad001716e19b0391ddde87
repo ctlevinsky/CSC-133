@@ -1,0 +1,20 @@
+package com.mycompany.myapp;
+
+public class Game extends Form {
+	private GameWorld gw;
+	private MapView mv; // new in A2
+	private PointsView pv; // new in A2
+
+	public Game() {
+		gw = new GameWorld(); // create “Observable”
+		mv = new MapView(); // create an “Observer” for the map
+		pv = new PointsView(gw); // create an “Observer” for the points
+		gw.addObserver(mv); // register the map Observer
+		gw.addObserver(pv); // register the points observer
+		// code here to create menus, create Command objects for each command,
+		// add commands to Command menu, create a control panel for the buttons,
+		// add buttons to the control panel, add commands to the buttons, and
+		// add control panel, MapView panel, and PointsView panel to the form
+		this.show();
+	}
+}

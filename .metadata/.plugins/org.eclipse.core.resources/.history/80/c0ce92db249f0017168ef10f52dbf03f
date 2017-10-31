@@ -1,0 +1,24 @@
+package com.mycompany.myapp;
+import java.util.Random;
+import com.codename1.charts.util.ColorUtil;
+
+public class Astroid extends Moveable {
+	
+	Random rand = new Random();
+	private int size = rand.nextInt(5);
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public Astroid(double locX, double locY) {
+		this.setLocX(locX);
+		this.setLocY(locY);
+		this.setColor(ColorUtil.GRAY);
+	}
+	
+}

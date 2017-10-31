@@ -1,0 +1,30 @@
+package com.mycompany.myapp;
+import java.util.Random;
+
+public abstract class Moveable extends GameObject implements IMoveable {
+
+	private int speed;
+	private int direction;
+	
+	public void move() {
+		// TODO Auto-generated method stub
+
+	}
+	
+	public int getSpeed(){ return speed; }
+	
+	public int getDir(){ return direction; }
+	
+	public void setSpeed(int speed) { this.speed = speed; }
+	
+	public void setDir(int dir) { this.direction = dir; }
+	
+	public String toString(){
+		String parentDesc = super.toString();
+		String myDesc = ", speed = " + speed 
+									 + ", direction = " 
+									 + direction;
+		return parentDesc + myDesc;
+	}
+
+}

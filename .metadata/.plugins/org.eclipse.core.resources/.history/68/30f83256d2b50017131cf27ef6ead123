@@ -1,0 +1,32 @@
+package com.mycompany.myapp;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class GOCollection implements ICollection {
+	
+	private ArrayList<GameObject> objectList;
+	private Iterator it;
+	private int shipCount, asteroidCount, missileCount, stationCount;
+
+	public GOCollection() {
+		objectList = new ArrayList<GameObject>();
+		shipCount = 0;
+		asteroidCount = 0;
+		missileCount = 0;
+		stationCount = 0;
+	}
+
+	@Override
+	public void add(GameObject o) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void getIterator() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

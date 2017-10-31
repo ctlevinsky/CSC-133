@@ -1,0 +1,242 @@
+package com.mycompany.myapp;
+import java.util.ArrayList;
+
+public class GameWorld {
+
+	private final static double sizeX = 1024.0, sizeY = 768.0;
+	private int lives = 3, score = 0, time = 0;
+	private Ship ship;
+	private ArrayList<GameObject> worldArray = new ArrayList<GameObject>();
+	
+	public double getSizeX() { return sizeX; }
+	public double getSizeY() { return sizeY; }
+	public int getScore() { return score; }
+	public void setScore(int score) { this.score = score; }
+	
+	public void init(){
+		ship = new Ship(sizeX,sizeY);
+		worldArray.add(ship);
+	}
+
+	public void addAstroid() {
+		worldArray.add(new Asteroid());
+	}
+
+	public void addStation() {
+		worldArray.add(new SpaceStation());
+	}
+	
+	public void addShip() {
+		if (!(ship instanceof Ship)) {
+			ship = new Ship();	
+			worldArray.add(ship);
+		}
+		else
+			System.out.println("no ship created");
+	}
+	
+	public void incSpeed() { 
+		if (ship instanceof Ship)
+			ship.accelerate(1);
+		else 
+			System.out.println("Cannot execute 'increase' – no ship has been created");
+	}
+	
+	public void decSpeed() { 
+		if (ship instanceof Ship)
+			ship.accelerate(-1);
+		else 
+			System.out.println("Cannot execute 'decrease' – no ship has been created");
+	}
+	
+	public void turnLeft() { 
+		if (ship instanceof Ship)
+			ship.turn(-1); 
+		else 
+			System.out.println("Cannot execute 'left' – no ship has been created");
+	}
+	
+	public void turnRight() { 
+		if (ship instanceof Ship)
+			ship.turn(1); 
+		else 
+			System.out.println("Cannot execute 'right' – no ship has been created");	
+	}
+	
+	public void fire() { 
+		if (ship instanceof Ship) {
+			int missileCount = ship.getMissile();
+			if (missileCount > 0) {
+				worldArray.add(new Missile(ship.getDir(),ship.getLocX(),ship.getLocY()));
+				ship.setMissile(missileCount - 1);
+			}
+			else
+				System.out.println("OUT OF AMMO!");	
+		}
+		else
+			System.out.println("Cannot execute 'fire' – no ship has been created");
+	}
+	
+	public void jump() {
+		if (ship instanceof Ship) {
+			ship.setLocX(1024.0 / 2.0);
+			ship.setLocY(768.0 / 2.0);
+		}
+		else
+			System.out.println("Cannot execute 'jump' – no ship has been created");
+	}
+
+	public void resupply() { 
+		if (ship instanceof Ship)
+			ship.setMissile(10); 
+		else 
+			System.out.println("Cannot execute 'new' – no ship has been created");	
+	}
+	
+	public void killAstrd() {
+		int sz = worldArray.size();
+		boolean foundMsl = false, foundAstrd = false;
+		int mslIndex = 0, astrdIndex = 0;
+		for(int i = 0; i < sz; i++) {
+			if(worldArray.get(i) instanceof Missile) {
+				foundMsl = true;
+				mslIndex = i;
+			}
+			else if (worldArray.get(i) instanceof Asteroid) {
+				foundAstrd = true;
+				astrdIndex = i;
+			}
+			if (foundMsl == true && foundAstrd ==  true)
+				break;
+		}
+		if(foundMsl == true && foundAstrd == true) {
+			score += 100;
+			if (mslIndex < astrdIndex) {
+				worldArray.remove(astrdIndex);
+				worldArray.remove(mslIndex);	
+			}
+			else {
+				worldArray.remove(mslIndex);
+				worldArray.remove(astrdIndex);
+			}
+		}
+		else
+			System.out.println("Cannot Execute 'kill' - must have a missile AND asteroid");
+	}
+	
+	public void crash() {
+		if (ship instanceof Ship ) {
+			boolean foundShip = false, foundAstrd = false;
+			int shpIndex = 0, astrdIndex = 0;
+			int sz = worldArray.size();
+			for (int i = 0; i < sz; i++) {
+				if(worldArray.get(i) instanceof Ship) {
+					foundShip = true;
+					shpIndex = i;
+				}
+				else if (worldArray.get(i) instanceof Asteroid) {
+					foundAstrd = true;
+					astrdIndex = i;
+				}
+				if (foundShip == true && foundAstrd ==  true)
+					break;
+			}
+			if(foundShip == true && foundAstrd == true) {
+				if (shpIndex < astrdIndex) {
+					worldArray.remove(astrdIndex);
+					worldArray.remove(shpIndex);	
+				}
+				else {
+					worldArray.remove(shpIndex);
+					worldArray.remove(astrdIndex);
+				}
+				ship = null;
+				if(lives > 0) 
+					lives--;
+				else
+					System.out.println("GAME OVER!");
+			}
+			else
+				System.out.println("Cannot Execute 'crash' - no aseroid found");
+		}
+		else
+			System.out.println("Cannot execute 'crash' – no ship has been created");
+	}
+	
+	public void extrmnt() {
+		int sz = worldArray.size();
+		int a1 = 0, a2 = 0;
+		int counter = 0;
+		for(int i = 0; i < sz; i++) {
+			if(worldArray.get(i) instanceof Asteroid) {
+				counter++;
+				if(counter == 1) {
+					a1 = i;
+					System.out.println(a1);
+				}
+				else if(counter == 2) {
+					a2 = i;
+					System.out.println(a2);
+					break;
+				}
+				else break;
+			}
+		}
+		if(counter >= 2) {
+			worldArray.remove(a2);
+			worldArray.remove(a1);
+		}
+		else
+			System.out.println("Connot execute 'exterminate' - not enough asteroids");
+	}
+	
+	public void clockTick() {
+		int sz = worldArray.size();
+		time++;
+		if(sz > 0) {
+			for( int i = 0; i < sz; i++ ) {
+				if (worldArray.get(i) instanceof IMovable) {
+					IMovable mObj = (IMovable)worldArray.get(i);
+					mObj.move();
+				}
+				if (worldArray.get(i) instanceof SpaceStation) {
+					SpaceStation ssObj = (SpaceStation)worldArray.get(i);
+					if(time % ssObj.getRate() == 0) {
+						if (ssObj.isLightOn())
+							ssObj.setLightOn(false);	
+						else
+							ssObj.setLightOn(true);
+					}
+				}
+				if (worldArray.get(i) instanceof Missile) {
+					Missile mslObj = (Missile)worldArray.get(i);
+					int fuelLvl = mslObj.getFuel();
+					if( fuelLvl > 0)
+						mslObj.setFuel(fuelLvl - 1);
+					else {
+						mslObj = null;
+						worldArray.remove(i);
+					}
+				}
+			}
+		}	
+	}
+
+	public void print() {
+		System.out.println("Score=" + score + " Missiles=" + ship.getMissile() + " Time:"+ time);
+	}
+	
+	public void printMap() {
+		int sz = worldArray.size();
+		for(int i = 0; i < sz; i++)
+			System.out.println(worldArray.get(i));
+		System.out.println();
+	}
+	
+	public void quit() {
+		System.out.println("Do you want to exit the game? Y or N");
+	}
+
+
+}
+	

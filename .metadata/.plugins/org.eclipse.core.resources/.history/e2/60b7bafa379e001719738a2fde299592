@@ -1,0 +1,13 @@
+package com.mycompany.myapp;
+
+public abstract class GameObject {
+
+	private double locX, locY;
+	private int color;
+	
+	public double getLocX() { return locX;}
+	
+	public double getLocY() { return locY;}
+	
+	public double getColor() { return color;}
+}

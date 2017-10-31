@@ -1,0 +1,21 @@
+package com.mycompany.myapp;
+
+
+import com.codename1.ui.Command;
+import com.codename1.ui.Image;
+import com.codename1.ui.events.ActionEvent;
+
+public class CommandQuit extends Command {
+	private GameWorld gw;
+
+	public CommandQuit(String command, GameWorld world) {
+		super(command);
+		gw = world;
+	}
+
+	public void actionPerformed(ActionEvent evt) {
+		System.out.println("Quit Pressed");
+		gw.quit();
+	}
+
+}

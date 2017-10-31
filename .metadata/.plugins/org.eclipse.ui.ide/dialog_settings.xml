@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\Users\LagLover\Google Drive\School\CSUS\17 Fall\CSC 133\A2Prj"/>
+		<item value="C:\Users\ctlev\Google Drive\School\CSUS\17 Fall\CSC 133\A0Prj"/>
+		<item value="C:\Users\ctlev\Google Drive\School\CSUS\17 Fall\CSC 133\A2Prj"/>
+		<item value="C:\Users\ctlev\Google Drive\School\CSUS\17 Fall\CSC 133\A1Prj"/>
+		<item value="C:\Users\LagLover\Google Drive\School\CSUS\17 Fall\CSC 133\A1Prj"/>
+	</list>
+	<section name="CleanDialogSettings">
+		<item value="828" key="DIALOG_WIDTH"/>
+		<item value="false" key="TOGGLE_SELECTED"/>
+		<item value="480" key="DIALOG_HEIGHT"/>
+		<item value="901" key="DIALOG_X_ORIGIN"/>
+		<item value="273" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="NewWizardAction">
+		<item value="codenameoneplugin.wizards.NewProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="CodenameOnePlugin"/>
+		</list>
+	</section>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item value="534" key="DIALOG_X_ORIGIN"/>
+		<item value="209" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>
