@@ -91,3 +91,4 @@
 2017-11-01 14:07:11,377 [Worker-6] WARN  org.eclipse.jgit.util.FS_Win32 - Exception caught during execution of command '[bash, --login, -c, which git]' in 'C:\Users\ctlev', return code '127', error message 'bash.exe: warning: could not find /tmp, please create!
 bash: which: command not found
 '
+2017-11-02 12:03:51,084 [Worker-5] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
